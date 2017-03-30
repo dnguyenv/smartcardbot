@@ -4,14 +4,8 @@ This recipe provides tutorial to simulate a simple card verification system usin
 
 ## Architecture overview
 
-<Need some diagram here to describe the architecture>
+![image](images/architecture.png)
 
-```
-Client app --TLS--> node-red <---> Cloudant
-                      |
-                      |
-                      Raspberry Pi
-```
 
 ## Building and connecting components together
 
