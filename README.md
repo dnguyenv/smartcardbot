@@ -37,6 +37,13 @@ After done with server configuration, assuming you have a node-red endpoint conf
 
 Client side is a simple desktop Java Swing application which can accept the card information red by card reader and submit the information to server component (hosted in IBM Bluemix) through a secured connection (TLS)
 
+Clone this code
+
+```
+git clone https://github.com/dnguyenv/smartcardbot
+cd smartcardbot
+```
+
 Change file CardBot.java in the client source code to use the node-red endpoint you created at server side.
 
 Build the code:
