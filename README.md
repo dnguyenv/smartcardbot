@@ -133,6 +133,8 @@ Your node-red flow will look like this:
 
 ![image](images/node-red-flow.png)
 
+The flow is using Duy's endpoint (https://smartcard.mybluemix.net/ieee/postCard)
+
 Double click on each node to adjust the configuration accordingly to your setup.
 
 Now, click on the Cloudant service and launch the administrator dashboard to create a Search index, name it ieeeSearch, under a `_design/ieeeSearch` design document.
@@ -140,11 +142,6 @@ Now, click on the Cloudant service and launch the administrator dashboard to cre
 
 ![image](images/search-index.png)
 
-
-
-<tutorial, steps to create each service goes here. Need details about how to create node-red flow and search Index in Cloudant>
-
-Use Duy's endpoint for now (https://smartcard.mybluemix.net/ieee/postCard)
 
 Here is the list of card IDs imported to Cloudant database:
 
@@ -187,9 +184,19 @@ After done with server configuration, assuming you have a node-red endpoint conf
 
 ### Device setup
 
-This part contains source code, instruction about how to setup the Raspberry Pi and wire parts together, as well as register to Bluemix IoT platform service
+This part contains source code, instruction about how to setup the Raspberry Pi and wire parts together, as well as register to Bluemix IoT platform service.
 
-Assuming you have your device setup, registered to Bluemix IoT service.
+Source code for your Raspberry Pi is here: `https://github.com/dnguyenv/smartcard-device.git`
+
+Assuming you have your device setup following [this] instruction for TJBot. Next step is to register the device with IBM IoT platform service in Bluemix. Remember to record your register information to use later in the code, something looks like this:
+
+```
+Organization ID: xxxx
+Device Type: xxxx
+Device ID: xxxx
+Authentication Method: token
+Authentication Token: xxxx
+```
 
 From inside your device:
 
@@ -200,7 +207,7 @@ $git clone https://github.com/dnguyenv/smartcard-device.git
 $cd smartcard-device
 $npm install
 ```
-Put your device information into client/device.json
+Put your device information (generated while registering your device in previous step) into client/device.json
 
 ```
 {
