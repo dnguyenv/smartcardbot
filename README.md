@@ -26,7 +26,36 @@ Use Duy's endpoint for now (https://smartcard.mybluemix.net/ieee/postCard)
 Here is the list of card IDs imported to Cloudant database:
 
 ```
-
+SW179
+SW1715
+SW173
+SW1717
+SW174
+SW1723
+SW1713
+SW1721
+SW1714
+SW1730
+SW1728
+SW1734
+SW1726
+SW1711
+SW176
+SW1716
+SW1720
+SW1729
+SW1710
+SW1722
+SW1727
+SW1719
+SW1712
+SW178
+SW1733
+SW177
+SW1732
+SW1731
+SW1718
+SW171
 ```
 
 After done with server configuration, assuming you have a node-red endpoint configured at:
