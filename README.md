@@ -19,6 +19,138 @@ Client app --TLS--> node-red <---> Cloudant
 
 Server component is composed by a node-red application, a Cloudant service and an IBM IoT platform service
 
+Go to Catalog of Bluemix, [create an Internet of Things platform starter boilerplate](https://console.ng.bluemix.net/catalog/?taxonomyNavigation=apps&category=iot&search=node-red)
+
+The boilerplate comes with a Cloudant instance where you can store and query data, and an IoT platform service to manage and control your connected devices, apps
+
+Import this Node-red flow into your Node-red instance which comes with the boilerplate:
+
+```
+[{
+    "id": "8ace248a.9f712",
+    "type": "tab",
+    "label": "Flow 1"
+}, {
+    "id": "8360792a.d6adb",
+    "type": "http in",
+    "z": "8ace248a.9f712",
+    "name": "postCard",
+    "url": "/ieee/postCard",
+    "method": "post",
+    "swaggerDoc": "",
+    "x": 103.5,
+    "y": 188.25,
+    "wires": [
+        ["8e776782.ff3aa8"]
+    ]
+}, {
+    "id": "1c79a1a.4747a5e",
+    "type": "cloudant in",
+    "z": "8ace248a.9f712",
+    "name": "smartcarddb",
+    "cloudant": "",
+    "database": "smartcard",
+    "service": "smartcard-cloudantNoSQLDB",
+    "search": "_idx_",
+    "design": "ieeeSearch",
+    "index": "ieeeSearch",
+    "x": 420.5,
+    "y": 118.25,
+    "wires": [
+        ["7d81b705.79f358", "2279667c.351eca"]
+    ]
+}, {
+    "id": "7d81b705.79f358",
+    "type": "http response",
+    "z": "8ace248a.9f712",
+    "name": "smartCardResponse",
+    "x": 738.5,
+    "y": 41.5,
+    "wires": []
+}, {
+    "id": "8e776782.ff3aa8",
+    "type": "function",
+    "z": "8ace248a.9f712",
+    "name": "queryCards",
+    "func": "var str = msg.payload.card;\n\n/*var queryString = {\n    query:str,\n    limit: 1\n\n}*/\nvar queryString = \"ieeeSearch:\" + str;\n\nmsg.payload = queryString;\n\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 298.5,
+    "y": 202.75,
+    "wires": [
+        ["1c79a1a.4747a5e"]
+    ]
+}, {
+    "id": "b28a977e.89e5d",
+    "type": "debug",
+    "z": "8ace248a.9f712",
+    "name": "",
+    "active": true,
+    "console": "false",
+    "complete": "false",
+    "x": 735.5,
+    "y": 176.5,
+    "wires": []
+}, {
+    "id": "2279667c.351eca",
+    "type": "function",
+    "z": "8ace248a.9f712",
+    "name": "message",
+    "func": "var message = null;\nif (msg.payload.length > 0){\n    message = 'green';\n}else{\n    message = 'red';\n}\nmsg.payload = message;\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 488.5,
+    "y": 195.75,
+    "wires": [
+        ["b28a977e.89e5d", "386b17cf.e754f8"]
+    ]
+}, {
+    "id": "386b17cf.e754f8",
+    "type": "ibmiot out",
+    "z": "8ace248a.9f712",
+    "authentication": "boundService",
+    "apiKey": "7076402a.839de8",
+    "outputType": "cmd",
+    "deviceId": "thienanbot",
+    "deviceType": "RaspberryPi",
+    "eventCommandType": "alert",
+    "format": "string",
+    "data": "default",
+    "qos": 0,
+    "name": "IBM IoT",
+    "service": "registered",
+    "x": 745.5,
+    "y": 291.5,
+    "wires": []
+}, {
+    "id": "7076402a.839de8",
+    "type": "ibmiot",
+    "z": "",
+    "name": "RasberryPi",
+    "keepalive": "60",
+    "domain": "",
+    "cleansession": true,
+    "appId": "",
+    "shared": false
+}]
+```
+
+Your node-red flow will look like this:
+
+![image](images/node-red-flow.png)
+
+Now, click on the Cloudant service and launch the administrator dashboard to create a Search index, name it ieeeSearch, under a `_design/ieeeSearch` design document.
+
+Search index function:
+
+```
+function (doc) {
+  if(doc.ID){
+    index("ieeeSearch", doc.ID,{"store":"yes"});
+  }
+}
+```
+
 <tutorial, steps to create each service goes here. Need details about how to create node-red flow and search Index in Cloudant>
 
 Use Duy's endpoint for now (https://smartcard.mybluemix.net/ieee/postCard)
