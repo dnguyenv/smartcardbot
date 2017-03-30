@@ -23,7 +23,7 @@ Go to Catalog of Bluemix, [create an Internet of Things platform starter boilerp
 
 The boilerplate comes with a Cloudant instance where you can store and query data, and an IoT platform service to manage and control your connected devices, apps
 
-Import this Node-red flow into your Node-red instance which comes with the boilerplate:
+Import this Node-red flow into your Node-red instance which comes with the boilerplate
 
 ```
 [{
@@ -138,6 +138,8 @@ Import this Node-red flow into your Node-red instance which comes with the boile
 Your node-red flow will look like this:
 
 ![image](images/node-red-flow.png)
+
+Double click on each node to adjust the configuration accordingly to your setup. 
 
 Now, click on the Cloudant service and launch the administrator dashboard to create a Search index, name it ieeeSearch, under a `_design/ieeeSearch` design document.
 
