@@ -62,7 +62,57 @@ After done with server configuration, assuming you have a node-red endpoint conf
 
 `https://smartcard-test.mybluemix.net/ieee/postCard`
 
-### Client side
+### Device setup
+
+This part contains source code, instruction about how to setup the Raspberry Pi and wire parts together, as well as register to Bluemix IoT platform service
+
+Assuming you have your device setup, registered to Bluemix IoT service.
+
+From inside your device:
+
+Clone the recipe source code:
+
+```
+$git clone https://github.com/dnguyenv/smartcard-device.git
+$cd smartcard-device
+$npm install
+```
+Put your device information into client/device.json
+
+```
+{
+        "org": "xxxxx",
+        "domain": "internetofthings.ibmcloud.com",
+        "type": "RaspberryPi",
+        "id": "thienanbot",
+        "auth-method": "token",
+        "auth-token": "xxxxxxxxxxxxxxxx"
+}
+```
+
+Register a Text to speech service in Bluemix and update config.js file with the credential of the service
+
+```
+// You can change the voice of the robot to your favorite voice.
+exports.voice = 'en-US_LisaVoice';
+// Some of the available options are:
+// en-US_AllisonVoice
+// en-US_LisaVoice
+// en-US_MichaelVoice (the default)
+
+//Credentials for Watson Text to Speech service
+exports.TTSPassword = 'xxxxxx' ;
+exports.TTSUsername = 'xxxxxx' ;
+
+```
+
+Run the code
+
+```
+$npm start
+```
+
+### Desktop application side
 
 Client side is a simple desktop Java Swing application which can accept the card information red by card reader and submit the information to server component (hosted in IBM Bluemix) through a secured connection (TLS)
 
@@ -86,7 +136,3 @@ Run the code:
 ```
 java -cp smartcard.jar com.ieee.smartcard.CardBotDemo
 ```
-
-### Device setup
-
-This part contains source code, instruction about how to setup the Raspberry Pi and wire parts together, as well as register to Bluemix IoT platform service
