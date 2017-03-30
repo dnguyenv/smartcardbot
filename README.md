@@ -257,11 +257,11 @@ Change file CardBot.java in the client source code to use the node-red endpoint 
 Build the code:
 
 ```
-sh build.sh
+sudo sh build.sh
 ```
 
 Run the code:
 
 ```
-java -cp smartcard.jar com.ieee.smartcard.CardBotDemo
+sudo java -cp smartcard.jar com.ieee.smartcard.CardBotDemo
 ```
