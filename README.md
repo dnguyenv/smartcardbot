@@ -139,19 +139,14 @@ Your node-red flow will look like this:
 
 ![image](images/node-red-flow.png)
 
-Double click on each node to adjust the configuration accordingly to your setup. 
+Double click on each node to adjust the configuration accordingly to your setup.
 
 Now, click on the Cloudant service and launch the administrator dashboard to create a Search index, name it ieeeSearch, under a `_design/ieeeSearch` design document.
 
-Search index function:
 
-```
-function (doc) {
-  if(doc.ID){
-    index("ieeeSearch", doc.ID,{"store":"yes"});
-  }
-}
-```
+![image](images/search-index.png)
+
+
 
 <tutorial, steps to create each service goes here. Need details about how to create node-red flow and search Index in Cloudant>
 
