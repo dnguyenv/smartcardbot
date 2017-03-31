@@ -72,7 +72,7 @@ Import this Node-red flow into your Node-red instance which comes with the boile
     "x": 298.5,
     "y": 202.75,
     "wires": [
-        ["1c79a1a.4747a5e"]
+        ["1c79a1a.4747a5e", "cd1d572e.e28748"]
     ]
 }, {
     "id": "b28a977e.89e5d",
@@ -90,7 +90,7 @@ Import this Node-red flow into your Node-red instance which comes with the boile
     "type": "function",
     "z": "8ace248a.9f712",
     "name": "message",
-    "func": "var message = null;\nif (msg.payload.length > 0){\n    message = 'green';\n}else{\n    message = 'red';\n}\nmsg.payload = message;\nreturn msg;",
+    "func": "var message = null;\n\nif (msg.payload.length > 0){\n    var pl = msg.payload[0];\n    name = pl[\"First Name\"] + \" \" + pl[\"Last Name\"];\n    message = {command:\"green\",name:name};\n}else{\n    message = {command:\"red\"};\n}\n\nmsg.payload = message;\n\nreturn msg;",
     "outputs": 1,
     "noerr": 0,
     "x": 488.5,
@@ -108,13 +108,24 @@ Import this Node-red flow into your Node-red instance which comes with the boile
     "deviceId": "thienanbot",
     "deviceType": "RaspberryPi",
     "eventCommandType": "alert",
-    "format": "string",
+    "format": "json",
     "data": "default",
     "qos": 0,
     "name": "IBM IoT",
     "service": "registered",
     "x": 745.5,
     "y": 291.5,
+    "wires": []
+}, {
+    "id": "cd1d572e.e28748",
+    "type": "debug",
+    "z": "8ace248a.9f712",
+    "name": "",
+    "active": true,
+    "console": "false",
+    "complete": "false",
+    "x": 479.5,
+    "y": 345.5,
     "wires": []
 }, {
     "id": "7076402a.839de8",
@@ -181,6 +192,12 @@ SW171
 After done with server configuration, assuming you have a node-red endpoint configured at:
 
 `https://smartcard-test.mybluemix.net/ieee/postCard`
+
+And you can do the test against the flow via a simple CURL command, eg:
+
+```
+curl -X POST -H "Content-Type: application/json" -d {\"card\":\"Some-Code-Here\"} https://smartcard-test.mybluemix.net/ieee/postCard
+```
 
 ### Device setup
 
