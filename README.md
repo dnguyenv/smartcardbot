@@ -188,7 +188,7 @@ This part contains source code, instruction about how to setup the Raspberry Pi 
 
 Source code for your Raspberry Pi is here: `https://github.com/dnguyenv/smartcard-device.git`
 
-Assuming you have your device setup following [this] instruction for TJBot. Next step is to register the device with IBM IoT platform service in Bluemix. Remember to record your register information to use later in the code, something looks like this:
+Assuming you have your device setup following [this](https://ibmtjbot.github.io/#gettj) instruction for TJBot. Next step is to register the device with IBM IoT platform service in Bluemix. Remember to record your register information to use later in the code, something looks like this:
 
 ```
 Organization ID: xxxx
